@@ -1,0 +1,5 @@
+export const GET_PRO_DETAIL = 'GET_PRO_DETAIL'
+export const ADD_TO_CART = 'ADD_TO_CART'
+export const CHANGE_VERSION = 'CHANGE_VERSION'
+export const CHANGE_COLOR = 'CHANGE_COLOR'
+export const CHANGE_PACKAGE = 'CHANGE_PACKAGE'
