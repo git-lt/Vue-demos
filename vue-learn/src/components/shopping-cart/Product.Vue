@@ -1,64 +1,144 @@
 <template>
   <div class="pro-choose-main flex flex-cell-full">
       <div class="pro-view cell-1-3">
-          <img src="//c1.mifile.cn/f/i/15/item/buyphone/mi5.jpg" alt="小米手机5" id="J_proImg">
+          <img :src="productImg" alt="小米手机5" id="J_proImg">
       </div>
       <div class="pro-info cell">
           <div class="pro-title clearfix">
               <h1>
                   <span class="pro-name">购买小米手机5</span>
-                  <span class="pro-price">1599元</span>
+                  <span class="pro-price">{{productPrice}}元</span>
               </h1>
           </div>
-          <p style="color:red;">重磅特惠，小米5特价1599元起！</p>
           <p></p>
           <div id="J_proStep">
             <div class="pro-choose-step">
-              <div class="step-title"> 1. 选择版本 <i class="pro-version-desc-icon">!</i> <span class="pro-version-desc">高通骁龙820处理器 最高主频 1.8GHz，3GB内存，32GB容量，全网通3.0</span> </div>
+              <div class="step-title"> 1. 选择版本 <i class="pro-version-desc-icon">!</i> <span class="pro-version-desc">{{productDesc}}</span> </div>
               <ul class="step-list flex flex-direc-x flex-wrap flex-gutter">
-                <li class="cell-1-2 active"><span class="step-list_item">标准版 3GB内存+32GB容量</span></li>
+                <!-- <li class="cell-1-2 active"><span class="step-list_item">标准版 3GB内存+32GB容量</span></li>
                 <li class="cell-1-2"><span class="step-list_item">高配版 3GB内存+64GB容量</span></li>
-                <li class="cell-1-2"><span class="step-list_item">尊享版 4GB内存+128GB容量</span></li>
+                <li class="cell-1-2"><span class="step-list_item">尊享版 4GB内存+128GB容量</span></li> -->
+                <li class="cell-1-2" v-for="item in productData.versionList" :id="item.id" :class="{active: versionId==item.id}" @click="changeVersion(item)"><span class="step-list_item">{{item.title}}</span></li>
               </ul>
             </div>
             <div class="pro-choose-step">
               <div class="step-title"> 2. 选择颜色 <i class="pro-version-desc-icon">!</i> <span class="pro-version-desc"></span> </div>
               <ul class="step-list flex flex-direc-x flex-gutter flex-wrap">
-                <li class="cell-1-2" title="黑色 1599元">  <span class="step-list_item"><img src="//c1.mifile.cn/f/i/15/item/buyphone/mi4-icon-hei.png" alt="黑色">  黑色</span>  </li>
+                <!-- <div v-for="item in colorData">{{item}}</div> -->
+                <li class="cell-1-2" v-for="item in colorData" title="{{item.title}} 1599元" :id="item.id"  :class="{ active: colorId==item.id }" @click="changeColor(item)">  <span class="step-list_item"><img :src="item.colorTip" :alt="item.title">  {{item.title}}</span>  </li>
+                <!-- <li class="cell-1-2" title="黑色 1599元">  <span class="step-list_item"><img src="//c1.mifile.cn/f/i/15/item/buyphone/mi4-icon-hei.png" alt="黑色">  黑色</span>  </li>
                 <li class="cell-1-2" title="白色 1599元">  <span class="step-list_item"><img src="//c1.mifile.cn/f/i/15/item/buyphone/mi4-icon-bai.png" alt="白色">  白色</span>  </li>
                 <li class="cell-1-2" title="金色 1599元">  <span class="step-list_item"><img src="//c1.mifile.cn/f/i/15/item/buyphone/note3-icon-jin.png" alt="金色">  金色</span>  </li>
-                <li class="cell-1-2" title="淡紫色 1599元">  <span class="step-list_item"><img src="//c1.mifile.cn/f/i/15/item/buyphone/minote-icon-fen.png" alt="淡紫色">  淡紫色</span>  </li>
+                <li class="cell-1-2" title="淡紫色 1599元">  <span class="step-list_item"><img src="//c1.mifile.cn/f/i/15/item/buyphone/minote-icon-fen.png" alt="淡紫色">  淡紫色</span>  </li> -->
               </ul>
             </div>
-            <div class="pro-choose-step choose-step_package"> <h3 class="step-title">3. 添加特惠配件套装</h3>
+            <div class="pro-choose-step choose-step_package" v-if="colorId!==''"> <h3 class="step-title">3. 添加特惠配件套装</h3>
               <ul class="step-list flex flex-direc-x flex-gutter flex-wrap">
-                <li class="cell-1-4" title="必备套装 71元"> <span class="step-list_item">必备套装 <br> 71元 <i>省11 元</i></span> </li>
+                <li class="cell-1-4" v-for="item in productData.packageList" :class="{active: packageId==item.id}" title="{{item.title}} {{item.price}}元" @click="changePackage(item.id)">
+                  <span class="step-list_item" v-if="item.price>0">{{item.title}} <br> {{item.price}}元 <i>{{item.discount}}</i></span>
+                  <span class="step-list_item" v-else>{{item.title}} <br><i>{{item.discount}}</i></span>
+                </li>
+                <!-- <li class="cell-1-4" title="必备套装 71元"> <span class="step-list_item">必备套装 <br> 71元 <i>省11 元</i></span> </li>
                 <li class="cell-1-4" title="实用套餐 195元"> <span class="step-list_item">实用套餐 <br> 195元 <i>省31 元</i></span> </li>
                 <li class="cell-1-4" title="全能套装 238元"> <span class="step-list_item">全能套装 <br> 238元 <i>省13 元</i></span> </li>
-                <li class="cell-1-4"> <span class="step-list_item">裸机<br><i>不享受优惠</i></span> </li>
+                <li class="cell-1-4"> <span class="step-list_item">裸机<br><i>不享受优惠</i></span> </li> -->
               </ul>
+              <div class="package-list-imgs">
+                <img src="http://7xi480.com1.z0.glb.clouddn.com/mi5_pkg_01.png" alt="" v-show="packageId===1">
+                <img src="http://7xi480.com1.z0.glb.clouddn.com/mi5_pkg_02.png" alt="" v-show="packageId===2">
+                <img src="http://7xi480.com1.z0.glb.clouddn.com/mi5_pkg_03.png" alt="" v-show="packageId===3">
+              </div>
             </div>
           </div>
           <div class="choose-result-msg">
               <span class="msg-tit">您选择了以下产品:</span>
-              <p class="msg-bd">小米手机5 标准版 3GB内存+32GB容量</p>
+              <p class="msg-bd">小米手机5 {{chkProductInfo}} {{productPrice}}元</p>
           </div>
-          <div class="pro-choose-result hide"></div>
           <div class="pro-choose-result">
-              <a href="javascript:void(0);" class="btn btn-large btn-dakeLight">下一步</a>
+              <a href="javascript:void(0);" v-if="packageId===''" class="buy-btn btn-large btn-dakeLight">下一步</a>
+              <a href="javascript:void(0);" v-else class="buy-btn btn-large btn-primary">立即购买</a>
           </div>
       </div>
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
+import VueResource from 'vue-resource'
+
+Vue.use(VueResource)
+
+Vue.http.options.root = '/mock/cart';
+const DEFAULT_IMG = '//c1.mifile.cn/f/i/15/item/buyphone/hongmipro-zuhe.jpg';
+
   export default {
     name:'cart-product',
     data(){
       return {
-
+        versionId:'',
+        colorId:'',
+        packageId:'',
+        productImg:DEFAULT_IMG,
+        productPrice:0,
+        productDesc:'',
+        productData:{},
+        buyInfo:{}
       }
-    }
+    },
+    methods:{
+      changeVersion(version){
+        this.versionId = version.id;
+        this.productImg = DEFAULT_IMG;
+        this.colorId = '';
+        this.packageId='';
+        this.productPrice = version.price;
+        this.productDesc = version.desc;
+      },
+      changeColor(color){
+        this.colorId = color.id;
+        this.productImg = color.img;
+        this.packageId='';
+      },
+      changePackage(id){
+        this.packageId = id;
+      },
+      addToCart(){},
+      getAjax(transition){
+        var data = require('../../../mock/cart/products.js');
+        let versionList0 = data.result.versionList[0];
+        transition.next({
+          productData:data.result,
+          versionId:versionList0.id,
+          productPrice:versionList0.price,
+          productDesc:versionList0.desc
+        });
+        // this.$http.get('/product.json').then((response) => {
+        // }, (response) => {
+        // });
+      }
+    },
+    computed:{
+      colorData:function(){
+        let self = this, versionList = this.productData.versionList, colorIds=[];
+        if(!versionList || !versionList.length) return [];
+
+        colorIds = versionList.find(v=>v.id===self.versionId).opensell;
+        return this.productData.colorList.filter(v=>colorIds.includes(v.id));
+      },
+      chkProductInfo:function(){
+        let info = [], _this = this;
+        if(this.versionId) info.push(this.productData.versionList.find(v=>v.id == _this.versionId).title);
+        if(this.colorId) info.push(this.colorData.find(v=>v.id == _this.colorId).title);
+        if(this.packageId) info.push(this.productData.packageList.find(v=>v.id == _this.packageId).title);
+        return info.join(' ');
+      }
+    },
+    route: {
+      data(transition){
+        var self = this
+        self.getAjax(transition)
+      }
+    },
   }
 </script>
 
@@ -343,7 +423,8 @@
     padding-top: 15px
 }
 
-.pro-choose-result .btn {
+.buy-btn {
+  display: block;
   margin-right: 20px;
   text-align: center;
   font-size: 14px;
@@ -945,6 +1026,17 @@ ul,li,dl,dt,dd,p,em {
     width: 178px;
     height: 48px;
     line-height: 48px;
+}
+.btn-primary {
+    background: #ff6700;
+    border-color: #ff6700;
+    color: #fff;
+}
+.package-list-imgs {
+  margin-top: 10px;
+}
+.package-list-imgs img {
+  max-width: 100%;
 }
 
 </style>

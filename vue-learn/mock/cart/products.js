@@ -1,5 +1,4 @@
-var Mock = require('mockjs');
-
+// var Mock = require('mockjs');
 module.exports = {
     "result":{
       versionList:[
@@ -22,7 +21,7 @@ module.exports = {
           desc:'高通骁龙820处理器 最高主频 2.15GHz，4GB内存，128GB容量，全网通3.0',
           title: '尊享版 4GB内存+128GB容量',
           price: 2399,
-          opensell: [775]
+          opensell: [875, 873, 874]
         }
       ],
       colorList:[
@@ -41,7 +40,7 @@ module.exports = {
         {
           id:804,
           img:'//c1.mifile.cn/f/i/g/2015/cn-index/mi5-zi-webfile.jpg',
-          title:'淡紫色',
+          title:'粉色',
           colorTip:'//c1.mifile.cn/f/i/15/item/buyphone/minote-icon-fen.png'
         },
         {
@@ -50,24 +49,46 @@ module.exports = {
           title:'黑色',
           colorTip:'//c1.mifile.cn/f/i/15/item/buyphone/mi4-icon-hei.png'
         },
+        {
+          id:875,
+          img:'//c1.mifile.cn/f/i/15/item/buyphone/hongmipro-jin.jpg',
+          title:'高光金色',
+          colorTip:'//c1.mifile.cn/f/i/15/item/buyphone/note3-icon-jin.png'
+        },
+        {
+          id:874,
+          img:'//c1.mifile.cn/f/i/15/item/buyphone/hongmipro-yin.jpg',
+          title:'高光银色',
+          colorTip:'//c1.mifile.cn/f/i/15/item/buyphone-common/icon-yin.jpg'
+        },
+        {
+          id:873,
+          img:'//c1.mifile.cn/f/i/15/item/buyphone/hongmipro-hui.jpg',
+          title:'高光灰色',
+          colorTip:'//c1.mifile.cn/f/i/15/item/buyphone-common/icon-qianhui.jpg'
+        },
       ],
       packageList:[
         {
+          id:1,
           title:'必备套装',
           price: 71,
           discount: '省11 元'
         },
         {
+          id:2,
           title:'实用套餐',
           price: 195,
           discount: '省31 元'
         },
         {
+          id:3,
           title:'全能套装',
           price: 238,
           discount: '省13 元'
         },
         {
+          id:4,
           title:'裸机',
           price: 0,
           discount: '不享受优惠'

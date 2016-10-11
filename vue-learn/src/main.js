@@ -11,7 +11,7 @@ import NotFound from './components/NotFound.vue'
 import Notice from './components/Notice.vue'
 import Select2 from './components/Select2.vue'
 import VueSwiper from './components/VueSwiper.vue'
-import VueProduct from './shopping-cart/App.vue'
+import VueProduct from './components/shopping-cart/Product.vue'
 
 Vue.use(Router);
 
