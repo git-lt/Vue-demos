@@ -1,16 +1,25 @@
 <template lang="html">
-  <div>
-    <h4>正在热映</h4>
-  </div>
+  <ul>
+    <film-item v-for="film in films" :film="film"></film-item>
+    <router-link to="/film">
+      <more-button>更多热门电影</more-button>
+    </router-link>
+  </ul>
 </template>
 
 <script>
+import FilmItem from '../../components/film-item'
+import MoreButton from '../../components/more-button'
+
 export default {
-  computed: {},
-  methods: {},
-  components: {}
+  props:{
+    films:{
+      type: Array,
+      required: true
+    }
+  },
+  components: {
+    FilmItem, MoreButton
+  }
 }
 </script>
-
-<style lang="css">
-</style>

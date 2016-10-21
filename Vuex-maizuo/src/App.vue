@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import Sidebar from './components/Sidebar'
-import Navbar from './components/Navbar'
+import Sidebar from './components/sidebar'
+import Navbar from './components/navbar'
 import { mapGetters } from 'vuex'
 
 export default {

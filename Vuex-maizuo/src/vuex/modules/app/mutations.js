@@ -1,7 +1,8 @@
 import {
   CHANGE_LEFTNAV_STATE,
   START_LOADING,
-  FINISH_LOADING
+  FINISH_LOADING,
+  SET_TITLE
 } from './mutation-types'
 
 const mutations = {
@@ -16,6 +17,11 @@ const mutations = {
   // 关闭loading
   [FINISH_LOADING](state){
     state.loading = false
+  },
+  // 设置标题 [页面路由与title同步]
+  [SET_TITLE](state, title){
+    state.title = title || 'title'
+    window && window.document && (window.document.title = state.title)
   }
 }
 

@@ -1,0 +1,18 @@
+<template lang="html">
+  <li class="message-list-item">
+    <h4 class="message-author-name">{{ message.authorName }}</h4>
+    <div class="message-time">
+      {{ message.timestamp | time }}
+    </div>
+    <div class="message-text">{{ message.text }}</div>
+  </li>
+</template>
+
+<script>
+export default {
+  name: 'Message',
+  props: {
+    message: Object
+  }
+}
+</script>

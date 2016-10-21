@@ -33,8 +33,8 @@ const _get = ({url, query}, commit) => {
  * @param  {[Number]} count  [每页数量]
  * @return {[Promise]}        [Promise]
  */
-export const fetchComingSoonLists = ({ commit }, page, count) =>{
-  const url = '/film/comming-soon'
+export const fetchComingSoonLists = ({ commit }, {page, count}) =>{
+  const url = '/film/coming-soon'
   const query = `count=${count}&page=${page}&_t=` + new Date().getTime()
 
   return _get({url, query}, commit)
@@ -56,7 +56,7 @@ export const fetchComingSoonLists = ({ commit }, page, count) =>{
  * @param  {[Number]} count  [每页数量]
  * @return {[Promise]}        [Promise]
  */
-export const fetchNowPlayingLists = ({ commit }, page, count) => {
+export const fetchNowPlayingLists = ({ commit }, {page, count}) => {
   const url = '/film/now-playing'
   const query = `count=${count}&page=${page}&_t=` + new Date().getTime()
 

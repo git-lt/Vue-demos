@@ -1,7 +1,7 @@
 <template lang="html">
   <section class="content">
     <swiper class="my-swipe" :options="swiperOption">
-      <swiper-slide class="silde" v-for="billboard in billboards">
+      <swiper-slide class="slide" v-for="billboard in billboards">
         <a :href="billboard.url">
           <image-placeholder :src='billboard.imageUrl' placeholder="http://static.m.maizuo.com/v4/static/app/asset/3d2cdb3bd9a23609aa2d84e7c2bfd035.png"></image-placeholder>
         </a>
@@ -30,7 +30,7 @@ export default {
     ]),
     swiperOption:{
       autoplay: 3000,
-      autoHeight: true
+      autoHeight: 300
     }
   },
   components: {
@@ -41,8 +41,8 @@ export default {
     swiperSlide
   },
   created(){
-    this.$store.dispatch('fetchComingSoonLists', 1, 5)
-    this.$store.dispatch('fetchNowPlayingLists', 1, 5)
+    this.$store.dispatch('fetchComingSoonLists', {page:1, count:5})
+    this.$store.dispatch('fetchNowPlayingLists', {page:1, count:5})
     this.$store.dispatch('fetchBillboards')
   },
 }
@@ -50,13 +50,13 @@ export default {
 
 <style lang="css">
 .my-swipe {
-  height: 9rem;
+  /*height: 9rem;*/
   color: #ffffff;
   font-size: 30px;
   text-align: center;
   overflow: hidden;
 }
-.silde img {
+.slide img {
   width: 100%;
 }
 

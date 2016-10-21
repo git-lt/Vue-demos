@@ -24,7 +24,7 @@ export default {
       }, 100)
     }
   },
-  pops: {
+  props: {
     src: {
       type: String,
       required: true

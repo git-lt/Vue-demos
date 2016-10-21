@@ -1,6 +1,6 @@
 import * as actions from './actions'
-// import * as getters from './getters'
-// import mutations from './mutations'
+import * as getters from './getters'
+import mutations from './mutations'
 
 const state = {
   comingSoonFilms: [],   //即将上映 的电影列表
@@ -11,7 +11,7 @@ const state = {
 
 export default{
   state,
-  // actions,
-  // getters,
-  // mutations
+  actions,
+  getters,
+  mutations
 }
